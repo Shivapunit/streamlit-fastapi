@@ -42,7 +42,7 @@ def render_response(response_data, selected_option):
         # Add more options as needed
 
 def main():
-    st.title("Data Processing App")
+    st.set_page_config(page_title="21BCE5542")
 
     # Get user input
     input_data = st.text_area("Enter JSON data", placeholder='{"data": ["A", "C", "z"]}')
