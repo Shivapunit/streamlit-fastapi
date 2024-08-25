@@ -21,7 +21,22 @@ def render_response(response_data):
         st.error(response_data["error"])
     else:
         st.success("Data processed successfully!")
-        st.json(response_data)
+
+        # Render the response based on the logic
+        if "result" in response_data:
+            result = response_data["result"]
+            if isinstance(result, list):
+                st.write("The result is a list:")
+                for item in result:
+                    st.write(f"- {item}")
+            elif isinstance(result, dict):
+                st.write("The result is a dictionary:")
+                for key, value in result.items():
+                    st.write(f"{key}: {value}")
+            else:
+                st.write(f"The result is: {result}")
+        else:
+            st.write(response_data)
 
 def main():
     st.title("Data Processing App")
