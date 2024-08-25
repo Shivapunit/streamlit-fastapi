@@ -44,6 +44,12 @@ def render_response(response_data, selected_option):
 def main():
     st.set_page_config(page_title="21BCE5542")
 
+    # Header
+    st.header("Data Processing Application")
+
+    # Big Title
+    st.markdown("<h1 style='text-align: center; color: red;'>21BCE5542</h1>", unsafe_allow_html=True)
+
     # Get user input
     input_data = st.text_area("Enter JSON data", placeholder='{"data": ["A", "C", "z"]}')
 
