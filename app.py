@@ -4,7 +4,7 @@ import json
 
 def process_data(data):
     # Send a POST request to the backend API
-    url = "http://localhost:8000"  # Replace with your backend API URL
+    url = "http://your-api-url.com/endpoint"  # Replace with your backend API URL
     headers = {"Content-Type": "application/json"}
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
@@ -15,6 +15,13 @@ def process_data(data):
         return response_data
     else:
         return {"error": "Failed to process the data"}
+
+def render_response(response_data):
+    if "error" in response_data:
+        st.error(response_data["error"])
+    else:
+        st.success("Data processed successfully!")
+        st.json(response_data)
 
 def main():
     st.title("Data Processing App")
@@ -33,9 +40,8 @@ def main():
         # Process the data
         response = process_data(data)
 
-        # Display the response
-        st.write("Response:")
-        st.json(response)
+        # Render the response
+        render_response(response)
 
 if __name__ == "__main__":
     main()
