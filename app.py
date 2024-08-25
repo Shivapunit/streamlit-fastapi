@@ -16,33 +16,40 @@ def process_data(data):
     else:
         return {"error": "Failed to process the data"}
 
-def render_response(response_data):
+def render_response(response_data, selected_option):
     if "error" in response_data:
         st.error(response_data["error"])
     else:
         st.success("Data processed successfully!")
 
-        # Render the response based on the logic
-        if "result" in response_data:
-            result = response_data["result"]
-            if isinstance(result, list):
-                st.write("The result is a list:")
+        # Render the response based on the selected option
+        if selected_option == "Alphabets & Numbers":
+            if "alphabets_numbers" in response_data:
+                result = response_data["alphabets_numbers"]
+                st.write("Alphabets and Numbers:")
                 for item in result:
                     st.write(f"- {item}")
-            elif isinstance(result, dict):
-                st.write("The result is a dictionary:")
-                for key, value in result.items():
-                    st.write(f"{key}: {value}")
             else:
-                st.write(f"The result is: {result}")
-        else:
-            st.write(response_data)
+                st.write("No data found for Alphabets and Numbers.")
+        elif selected_option == "Symbols":
+            if "symbols" in response_data:
+                result = response_data["symbols"]
+                st.write("Symbols:")
+                for item in result:
+                    st.write(f"- {item}")
+            else:
+                st.write("No data found for Symbols.")
+        # Add more options as needed
 
 def main():
     st.title("Data Processing App")
 
     # Get user input
     input_data = st.text_area("Enter JSON data", placeholder='{"data": ["A", "C", "z"]}')
+
+    # Create a dropdown for selecting the option
+    options = ["Alphabets & Numbers", "Symbols"]
+    selected_option = st.selectbox("Select an option", options)
 
     if st.button("Process Data"):
         # Parse the input JSON
@@ -55,8 +62,8 @@ def main():
         # Process the data
         response = process_data(data)
 
-        # Render the response
-        render_response(response)
+        # Render the response based on the selected option
+        render_response(response, selected_option)
 
 if __name__ == "__main__":
     main()
