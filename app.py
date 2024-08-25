@@ -44,8 +44,20 @@ def render_response(response_data, selected_option):
 def main():
     st.set_page_config(page_title="21BCE5542")
 
+    # Set background color
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background-color: #D3D3D3;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # Header
-    st.header("Bajaj Finserv Health Challenge: By Aastha Tiwari")
+    st.header("Data Processing Application")
 
     # Big Title
     st.markdown("<h1 style='text-align: center; color: red;'>21BCE5542</h1>", unsafe_allow_html=True)
